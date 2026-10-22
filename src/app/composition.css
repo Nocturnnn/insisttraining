@@ -1,0 +1,430 @@
+/* Brand geometry: backgrounds may be diagonal; text and controls are never clipped. */
+:root {
+  --diagonal: clamp(24px, 5.2vw, 100px);
+}
+.light-section {
+  --section-bg: var(--paper);
+}
+.dark-section {
+  --section-bg: var(--ink);
+}
+.angled {
+  clip-path: none;
+  z-index: auto;
+  isolation: isolate;
+  margin-top: 0;
+  padding-block: calc(65px + var(--diagonal) / 2);
+}
+.angled::before,
+.visit-section::before {
+  content: "";
+  position: absolute;
+  pointer-events: none;
+  z-index: -1;
+  left: 0;
+  right: 0;
+  top: calc(1px - var(--diagonal));
+  height: var(--diagonal);
+  background: var(--section-bg);
+  clip-path: polygon(0 100%, 100% 0, 100% 100%);
+}
+.modality-ribbon {
+  transform: none;
+  margin-top: calc(-1 * var(--diagonal));
+  z-index: 2;
+  min-height: calc(110px + var(--diagonal));
+  padding-block: calc(var(--diagonal) / 2);
+  clip-path: polygon(
+    0 var(--diagonal),
+    100% 0,
+    100% calc(100% - var(--diagonal)),
+    0 100%
+  );
+}
+.modality-ribbon p {
+  padding-block: 28px;
+  transform: rotate(-2.5deg);
+}
+.plans-section {
+  margin-top: calc(-1 * var(--diagonal));
+  padding-top: calc(85px + var(--diagonal));
+  padding-bottom: 100px;
+}
+.plans-section::before {
+  display: none;
+}
+.plans-description {
+  font-size: 15px;
+  color: #55545e;
+}
+.plan-inclusions {
+  font-size: 12px;
+  line-height: 1.65;
+  color: #55545e;
+  margin-bottom: 22px;
+}
+.featured .plan-inclusions {
+  color: white;
+}
+.modalities-section {
+  margin-top: 0;
+  z-index: auto;
+  padding-block: 95px 110px;
+}
+.modality-card {
+  display: block;
+  cursor: pointer;
+}
+.modality-card:focus-visible {
+  outline: 3px solid #c2bbff;
+  outline-offset: 4px;
+  clip-path: none;
+}
+.modality-card-label {
+  left: 9%;
+  right: 12%;
+}
+.modality-card-label > svg {
+  flex-shrink: 0;
+  width: 20px;
+}
+.modality-card:hover .photo {
+  transform: scale(1.025);
+}
+.visit-section {
+  isolation: isolate;
+  margin-top: 0;
+}
+.visit-copy {
+  padding-bottom: 80px;
+}
+.visit-photo-caption {
+  left: 16% !important;
+  right: 24px;
+  bottom: 40px;
+  max-width: 290px;
+}
+.visit-photo .photo {
+  object-position: 36% center !important;
+}
+.included {
+  --section-bg: var(--blue);
+  z-index: auto;
+}
+.hero {
+  background: var(--ink);
+}
+.responsive-photo {
+  position: absolute;
+  inset: 0;
+  display: block;
+}
+.hero-media,
+.banner-media {
+  position: absolute;
+  inset: 0;
+  z-index: -3;
+}
+.hero-media .photo {
+  object-position: 70% 25%;
+}
+.page-hiit .hero-media .photo {
+  object-position: 28% top;
+}
+.contact-banner {
+  margin-top: calc(-1 * var(--diagonal));
+  clip-path: polygon(0 var(--diagonal), 100% 0, 100% 100%, 0 100%);
+  min-height: clamp(600px, 43vw, 850px);
+  padding-block: calc(85px + var(--diagonal)) 85px;
+  background: var(--ink);
+}
+.banner-media .photo {
+  object-position: center 8%;
+}
+.hero-content {
+  animation: enter 460ms ease-out;
+}
+@keyframes enter {
+  from {
+    transform: translateY(6px);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+.gallery-grid > div:last-child .photo {
+  transform: none;
+}
+.duathlon-hero {
+  overflow: clip;
+  background: var(--ink);
+}
+.duathlon-half {
+  inset: 0 40% 0 0;
+  clip-path: polygon(0 0, 100% 0, 67% 100%, 0 100%);
+}
+.duathlon-half.second {
+  inset: 0 0 0 40%;
+  clip-path: polygon(33% 0, 100% 0, 100% 100%, 0 100%);
+}
+.duathlon-half .photo {
+  object-position: 70% 20%;
+}
+.duathlon-half.second .photo {
+  object-position: 85% 15%;
+}
+.duathlon-stripe {
+  inset: 0;
+  width: auto;
+  transform: none;
+  background: #2816ff9c;
+  clip-path: polygon(57% 0, 63% 0, 43% 100%, 37% 100%);
+}
+
+@media (max-width: 850px) {
+  .visit-photo {
+    min-height: 440px;
+  }
+  .visit-photo .photo {
+    object-position: 30% 25% !important;
+  }
+}
+@media (max-width: 600px) {
+  html {
+    scroll-padding-top: 32px;
+  }
+  h1,
+  h2,
+  h3 {
+    overflow-wrap: normal;
+  }
+  .button {
+    min-height: 50px;
+  }
+  .angled {
+    padding-block: 62px 78px;
+  }
+  .hero,
+  .home-hero,
+  .schedule-hero,
+  .page-circuito .hero {
+    display: block;
+    height: auto;
+    min-height: 0;
+  }
+  .hero-media {
+    position: relative;
+    inset: auto;
+    z-index: -2;
+    height: clamp(290px, 85vw, 420px);
+  }
+  .hero-media::after,
+  .banner-media::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(0deg, var(--ink), transparent 45%);
+  }
+  .hero-media .photo {
+    object-position: 72% 20%;
+  }
+  .page-pilates .hero-media .photo,
+  .schedule-hero .hero-media .photo {
+    object-position: 80% 20%;
+  }
+  .page-hiit .hero-media .photo {
+    object-position: 28% top;
+  }
+  .home-hero .hero-media .photo {
+    object-position: 70% 20%;
+  }
+  .hero > .hero-shade {
+    display: none;
+  }
+  .hero .hero-content,
+  .home-hero .hero-content,
+  .page-danca .hero-content,
+  .schedule-hero .hero-content {
+    position: relative;
+    margin-top: -58px;
+    padding-top: 0;
+    padding-bottom: 78px;
+  }
+  .hero h1,
+  .page-danca .hero h1 {
+    font-size: clamp(40px, 11.2vw, 61px);
+  }
+  .home-hero h1 {
+    font-size: clamp(39px, 10.9vw, 58px);
+  }
+  .hero .hero-description {
+    font-size: 14px;
+    margin-block: 19px 24px;
+  }
+  .hero .button {
+    font-size: 13px;
+  }
+  .modality-ribbon {
+    min-height: calc(82px + var(--diagonal));
+  }
+  .modality-ribbon p {
+    font-size: clamp(16px, 4.25vw, 25px);
+    padding: 26px 7px;
+  }
+  .plans-section {
+    margin-top: calc(-1 * var(--diagonal));
+    padding-top: calc(56px + var(--diagonal));
+    padding-bottom: 85px;
+  }
+  .plans-description {
+    font-size: 13px;
+    line-height: 1.7;
+    padding: 0;
+  }
+  .plan-inclusions {
+    font-size: 13px;
+  }
+  .plans-grid {
+    gap: 28px;
+  }
+  .plan.featured {
+    outline-offset: 3px;
+  }
+  .modalities-section {
+    padding-top: 65px;
+    padding-bottom: 85px;
+  }
+  .modality-card {
+    height: 265px;
+  }
+  .modality-card-label {
+    left: 10%;
+    right: 11%;
+  }
+  .modality-card-label h3 {
+    font-size: clamp(17px, 5.3vw, 24px);
+  }
+  .modality-card-label > svg {
+    width: 17px;
+  }
+  .more-activities a {
+    min-height: 38px;
+  }
+  .visit-copy {
+    padding: 60px 20px 72px;
+  }
+  .visit-copy h2 {
+    font-size: clamp(39px, 11.5vw, 54px);
+  }
+  .visit-photo {
+    min-height: 0;
+    height: 340px;
+    margin-top: calc(-1 * var(--diagonal));
+    clip-path: polygon(0 var(--diagonal), 100% 0, 100% 100%, 0 100%);
+  }
+  .visit-photo-caption {
+    left: 24px !important;
+    right: 20px;
+    font-size: 27px !important;
+    bottom: 24px !important;
+  }
+  .visit-photo .photo {
+    object-position: 25% 20% !important;
+  }
+  .contact-banner {
+    display: block;
+    padding: 0;
+    min-height: 0;
+  }
+  .banner-media {
+    position: relative;
+    inset: auto;
+    height: 300px;
+    z-index: -2;
+  }
+  .banner-media .photo {
+    object-position: 68% 10%;
+  }
+  .page-pilates .banner-media .photo {
+    object-position: 78% 10%;
+  }
+  .contact-banner > .hero-shade {
+    display: none;
+  }
+  .contact-banner .container {
+    padding-block: 12px 46px;
+  }
+  .contact-banner h2 {
+    font-size: clamp(36px, 10vw, 48px);
+  }
+  .contact-banner p {
+    font-size: 14px;
+  }
+  .contact-banner .button {
+    font-size: 13px;
+  }
+  .feature-image,
+  .page-pilates .feature-image,
+  .page-bike-in .feature-image {
+    height: 260px;
+  }
+  .gallery-grid {
+    grid-template-rows: 240px 190px;
+  }
+  .duathlon-hero {
+    min-height: 650px;
+    padding-block: 270px 68px;
+    align-items: flex-end;
+  }
+  .duathlon-half {
+    inset: 0;
+    clip-path: none;
+  }
+  .duathlon-half .photo {
+    object-position: center top;
+  }
+  .duathlon-half.second {
+    display: none;
+  }
+  .duathlon-stripe {
+    background: #2816ff70;
+    clip-path: polygon(57% 0, 62% 0, 39% 100%, 34% 100%);
+  }
+  .duathlon-hero .hero-shade {
+    background: linear-gradient(
+      0deg,
+      #090a0dfa 0%,
+      #090a0db3 30%,
+      transparent 75%
+    );
+  }
+  .duathlon-hero h1 {
+    font-size: clamp(39px, 10.8vw, 60px);
+  }
+  .duathlon-hero p:not(.eyebrow) {
+    font-size: 14px;
+    margin: 22px auto 26px;
+  }
+  .duathlon-cards article {
+    min-height: 400px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-content {
+    animation: none;
+  }
+  .modality-card:hover .photo {
+    transform: none;
+  }
+}
+
+.menu-toggle,
+.mobile-menu-heading button {
+  min-width: 44px;
+  min-height: 44px;
+}
+.mobile-dialog nav > a,
+.mobile-dialog summary,
+.dropdown-panel a {
+  min-height: 44px;
+}
