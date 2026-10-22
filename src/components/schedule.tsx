@@ -1,17 +1,28 @@
 "use client";
-import { useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { CalendarDays, Info, Clock3 } from "lucide-react";
 import { days, lessons, whatsappUrl } from "@/lib/data";
-import { Button } from "./ui";
-export function Schedule() {
+import { Button } from "./controls";
+function ActivityFromQuery({
+  onChange,
+}: {
+  onChange: (activity: string) => void;
+}) {
   const searchParams = useSearchParams();
   const requestedActivity = searchParams.get("modalidade") ?? "Todas";
-  const [activity, setActivity] = useState(
-    ["Pilates", "Dança", "Bike IN"].includes(requestedActivity)
-      ? requestedActivity
-      : "Todas",
-  );
+  useEffect(() => {
+    onChange(
+      ["Pilates", "Dança", "Bike IN"].includes(requestedActivity)
+        ? requestedActivity
+        : "Todas",
+    );
+  }, [requestedActivity, onChange]);
+  return null;
+}
+
+export function Schedule() {
+  const [activity, setActivity] = useState("Todas");
   const [day, setDay] = useState("Todos os dias");
   const filtered = lessons.filter(
     (l) =>
@@ -21,6 +32,9 @@ export function Schedule() {
   const shownDays = days.filter((d) => day === "Todos os dias" || d === day);
   return (
     <section className="schedule-section light-section angled" id="aulas">
+      <Suspense fallback={null}>
+        <ActivityFromQuery onChange={setActivity} />
+      </Suspense>
       <div className="container">
         <div className="schedule-heading">
           <div>

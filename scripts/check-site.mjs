@@ -73,6 +73,12 @@ for (const [route, html] of pages) {
 }
 console.log("OK destinos internos e âncoras da home");
 
+// The complete timetable must be usable before client-side JavaScript loads.
+assert.match(pages.get("/cronograma"), /<table>/);
+assert.match(pages.get("/cronograma"), /class="schedule-mobile"/);
+assert.doesNotMatch(pages.get("/cronograma"), /Carregando grade parcial/);
+console.log("OK grade de aulas no HTML inicial, inclusive a versão mobile");
+
 for (const file of await readdir(
   new URL("../public/images/", import.meta.url),
 )) {

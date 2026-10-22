@@ -4,7 +4,7 @@ import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { ArrowUpRight, ChevronDown, Menu, X } from "lucide-react";
 import { activities, communityLinks, whatsappUrl } from "@/lib/data";
-import { Logo } from "./ui";
+import { Logo } from "./controls";
 
 export function Header() {
   const path = usePathname();

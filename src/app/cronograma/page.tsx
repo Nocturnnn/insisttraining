@@ -1,6 +1,5 @@
 import { Hero, ContactBanner } from "@/components/ui";
 import { Schedule } from "@/components/schedule";
-import { Suspense } from "react";
 import { pageMetadata, whatsappUrl } from "@/lib/data";
 export const metadata = pageMetadata(
   "Cronograma de aulas",
@@ -23,18 +22,7 @@ export default function SchedulePage() {
         }
         description="Encontre sua próxima aula."
       />
-      <Suspense
-        fallback={
-          <section className="schedule-section light-section">
-            <div className="container">
-              <h2>Nossas aulas</h2>
-              <p>Carregando grade parcial de aulas…</p>
-            </div>
-          </section>
-        }
-      >
-        <Schedule />
-      </Suspense>
+      <Schedule />
       <ContactBanner
         image="comunidade"
         title={
